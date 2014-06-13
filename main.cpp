@@ -4,9 +4,9 @@
 #include <fstream>
 #include <streambuf>
 
-#include "SuffixTree.hpp"
+//#define DEBUG_PRINT
 
-#define DEBUG_PRINT
+#include "SuffixTree.hpp"
 
 void print_usage()
 {
@@ -53,23 +53,26 @@ int main(int argv, char* argc[])
 
     // Build the suffix tree
     SuffixTree stree = SuffixTree::naiveConstruct(file_contents);
-    /*
     std::cout << "Tree constructed" << std::endl;
-    stree.to_dot("a.dot");
 
+    /*
+    stree.to_dot("a.dot");
+    */
+    /*
     bool is_substring = stree.isSubstring(search_string);
     std::cout << "is_substring: " << is_substring << std::endl;
-    
+    */
+    /*
     bool is_suffix = stree.isSuffix(search_string);
     std::cout << "is_suffix: " << is_suffix << std::endl;
     */
     // Do the search
-    std::vector<int> matches = stree.findOccurences(search_string);
+    std::vector<std::string> matches = stree.findOccurences(search_string);
     std::cout << "occurs: ";
-    for(int i : matches)
+    for(const auto str : matches)
     {
         // Add one, as our indexes are 0 indexed
-        std::cout << i+1 << " ";
+        std::cout << str << " ";
     }
     std::cout << std::endl;
 }
